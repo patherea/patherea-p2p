@@ -1,0 +1,26 @@
+defaults:
+  - dataset: patherea
+  - model: P2PNet
+  - _self_
+
+params:
+  device: cuda:0
+  experiment_name: test_run
+  run_name: ${dataset.dataset_name}_b_${model.batch_size}_h_${model.height}_w_${model.width}_K_${model.n_anchors}_e_${dataset.epochs}
+  desc: ""
+  save_eval_freq: 100
+  use_saved: False
+  save_checkpoint: True
+  log_checkpoint: False
+
+debug:
+  save_val_patches: False
+  save_test_patches: False
+  save_test_images: True
+
+hydra:
+  mode: RUN
+  run:
+    dir: ./outputs
+  job:
+    chdir: True

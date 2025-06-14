@@ -1,0 +1,47 @@
+# Neuroendocrine Ki-67 proliferation index dataset (Patherea)
+dataset_name: patherea
+
+# TODO: Change dataset location
+data_dir: /path/to/Patherea_v1.1/Patherea_LNET_224_v1.1
+
+# Selection of the target classes:
+# 0: detection (*)
+# 1: positive_tumor_cell
+# 2: negative_tumor_cell
+# 3: normal_cell
+# 4: others_positive
+# 5: others_negative
+# (*) or special token 0: detection for combined class detection.
+# Note: "detection" class "0" cannot be used along other classes.
+classes: [1, 2, 3, 4, 5]
+# bg, fg (2-class)
+# fg value is used as a constant in a multi-class setting
+loss_cls_w: [0.5, 10]
+
+epochs: 200
+# Set this to 0, if using folds
+epochs_validate: 1
+# Empty seed == random
+data_seed:
+
+d_test_gt: 16
+det_thresh: 0.5
+# Stride = kernel is only supported for now!
+# Agregation on coordinates is not yet supported!
+test_stride: 224
+# This is used for online train/test split (test_fold not set)
+test_ratio: 0.2
+# Which folds to iterate through in training
+test_folds: [1, 2, 3]
+# Overrides test_folds above
+# Otherwise just used internally for test_folds
+test_fold:
+# Allow only other_positive examples (no positive tumor cell present)
+# This is only used in training to boost the discriminative performance
+# between the positive and others_positive classes.
+solo_other_pos: True
+# The percentage of training data used.
+# This is used to compare ImageNet vs. SSL
+train_ratio: 1.0
+# Whether to run Hungarian matching on bool matrix for evals
+hungarian_bool: True

@@ -1,0 +1,69 @@
+# Vanilla P2PNet config file
+# Parametrization follows the original implementation (1)
+# (1) https://arxiv.org/abs/2107.12746
+model_name: p2pnet
+
+# Preprocessing
+height: 224
+width: 224
+normalize_mean: [0.485, 0.456, 0.406]  # ImageNet
+normalize_std: [0.229, 0.224, 0.225]  # ImageNet
+#normalize_mean: [0.7068, 0.5755, 0.7220]  # HistAI
+#normalize_std: [0.1950, 0.2316, 0.1816]  # HistAI
+#normalize_mean: [0.5, 0.5, 0.5]
+#normalize_std: [0.5, 0.5, 0.5]
+
+# Empty seed == random
+method_seed:
+
+# Training params
+batch_size: 16
+# For multi-run = 0
+num_workers: 8
+lr: 1e-4
+wd: 1e-4
+T_0: 0
+T_mult: 2
+eta_min: 0
+loss_scale: 1
+
+# Hyperparameters
+# Backkbone
+# VGG-16, ConvNext, ViT-Adapter
+backbone: ViT-Adapter
+# Currently only implemented for ConvNext and ViT-Adapter
+# ConvNext variants (T, S, B, L)
+# ViT-Adapter variants (T, S, B)
+backbone_variant: S
+pretrained: False
+# FPN
+use_fpn: True
+# 256 for VGG-16 and ConvNext
+# ViT-Adapter: B = 768, S = 384, T = 192
+num_fpn_features: 384
+# 1-4 for VGG and ConvNext
+# Only 1 level supported
+levels: [2]
+#levels: [4]  # BCData
+# P2P
+n_anchors: [2, 2]
+h_p2p: False  # Hybrid P2PNet version (1:1 + 1:n)
+#n_anchors: [4, 4]  # BCData
+point_off_w: 1
+matching_p_w: 0.05
+matching_c_w: 1
+matching_n: 5
+loss_type: "ce" # ce, ce_focal, sig_focal, gce
+# cls_loss, reg_loss, 1_n_loss
+loss_total_w_cls: 1
+loss_total_w_reg: 2e-3
+loss_total_1_n: 0.5
+# focal loss
+gamma: 2
+alpha: 0.75
+# GCE loss
+gce_q: 0.2
+# ViT MLP layer vs. SwiGLUFFNFused (DINO v2 pretrained models)
+vit_mlp_layer: True
+# Freeze backbone (currently only supported in ViT)
+freeze_backbone: False
