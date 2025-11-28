@@ -66,10 +66,15 @@ src/outputs/epochs/
 If you use this code or dataset and find it helpful, please cite our work:
 
 ```bibtex
-@article{vstepec2024patherea,
-title={Patherea: Cell Detection and Classification for the 2020s},
-author={{\v{S}}tepec, Dejan and Jer{\v{s}}e, Maja and {\DJ}oki{\'c}, Sne{\v{z}}ana and Jeruc, Jera and Zidar, Nina and Sko{\v{c}}aj, Danijel},
-journal={arXiv preprint arXiv:2412.16425},
-year={2024}
+@article{STEPEC2026103868,
+title = {Patherea: Cell detection and classification for the 2020s},
+journal = {Medical Image Analysis},
+volume = {108},
+pages = {103868},
+year = {2026},
+issn = {1361-8415},
+doi = {https://doi.org/10.1016/j.media.2025.103868},
+url = {https://www.sciencedirect.com/science/article/pii/S1361841525004141},
+author = {Dejan Štepec and Maja Jerše and Snežana Đokić and Jera Jeruc and Nina Zidar and Danijel Skočaj},
 }
 ```
